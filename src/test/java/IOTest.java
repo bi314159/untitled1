@@ -49,21 +49,21 @@ public class IOTest {
     }
 
     @Test
-    public void test02()throws IOException{
+    public void test02() throws IOException {
         // 使用文件名称创建流对象
         FileInputStream fis = new FileInputStream("read.txt");
         // 定义变量，保存数据
         int b;
         // 循环读取
-        while ((b = fis.read())!=-1) {
-            System.out.println((char)b);
+        while ((b = fis.read()) != -1) {
+            System.out.println((char) b);
         }
         // 关闭资源
         fis.close();
     }
 
     @Test
-    public void test03()throws IOException{
+    public void test03() throws IOException {
         // 使用文件名称创建流对象.
         FileInputStream fis = new FileInputStream("read.txt"); // 文件中为abcde
         // 定义变量，作为有效个数
@@ -71,7 +71,7 @@ public class IOTest {
         // 定义字节数组，作为装字节数据的容器
         byte[] b = new byte[2];
         // 循环读取
-        while (( len= fis.read(b))!=-1) {
+        while ((len = fis.read(b)) != -1) {
             // 每次读取后,把数组变成字符串打印
             System.out.println(new String(b));
         }
@@ -88,7 +88,7 @@ public class IOTest {
     }
 
     @Test
-    public void test04()throws IOException{
+    public void test04() throws IOException {
         // 使用文件名称创建流对象.
         FileInputStream fis = new FileInputStream("read.txt"); // 文件中为abcde
         // 定义变量，作为有效个数
@@ -96,9 +96,9 @@ public class IOTest {
         // 定义字节数组，作为装字节数据的容器
         byte[] b = new byte[2];
         // 循环读取
-        while (( len= fis.read(b))!=-1) {
+        while ((len = fis.read(b)) != -1) {
             // 每次读取后,把数组的有效字节部分，变成字符串打印
-            System.out.println(new String(b,0,len));//  len 每次读取的有效字节个数
+            System.out.println(new String(b, 0, len));//  len 每次读取的有效字节个数
         }
         // 关闭资源
         fis.close();
@@ -109,18 +109,6 @@ public class IOTest {
         e
          */
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //注意：应该使用try-catch-finally处理异常。这里出于方便阅读代码，使用了throws的方式
@@ -138,21 +126,22 @@ public class IOTest {
     }
 
     @Test
-    public void test012()throws IOException {
+    public void test012() throws IOException {
         // 使用文件名称创建流对象
         FileOutputStream fos = new FileOutputStream("fos.txt");
         // 字符串转换为字节数组
         byte[] b = "abcde".getBytes();
         // 写出从索引2开始，2个字节。索引2是c，两个字节，也就是cd。
-        fos.write(b,2,2);
+        fos.write(b, 2, 2);
         // 关闭资源
         fos.close();
     }
+
     //这段程序如果多运行几次，每次都会在原来文件末尾追加abcde
     @Test
-    public void test013()throws IOException {
+    public void test013() throws IOException {
         // 使用文件名称创建流对象
-        FileOutputStream fos = new FileOutputStream("fos.txt",true);
+        FileOutputStream fos = new FileOutputStream("fos.txt", true);
         // 字符串转换为字节数组
         byte[] b = "abcde".getBytes();
         fos.write(b);
@@ -204,22 +193,8 @@ public class IOTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //方法1：使用FileInputStream\FileOutputStream实现非文本文件的复制
-    public void copyFileWithFileStream(String srcPath,String destPath){
+    public void copyFileWithFileStream(String srcPath, String destPath) {
         FileInputStream fis = null;
         FileOutputStream fos = null;
         try {
@@ -254,13 +229,13 @@ public class IOTest {
     }
 
     @Test
-    public void test1(){
+    public void test1() {
         String srcPath = "C:\\Users\\Administrator\\Videos\\2023-05-09 09-59-45.mkv";
         String destPath = "C:\\Users\\Administrator\\Videos\\2023-05-012 09-59-45.mkv";
 
         long start = System.currentTimeMillis();
 
-        copyFileWithFileStream(srcPath,destPath);
+        copyFileWithFileStream(srcPath, destPath);
 
         long end = System.currentTimeMillis();
 
@@ -269,7 +244,7 @@ public class IOTest {
     }
 
     //方法2：使用BufferedInputStream\BufferedOuputStream实现非文本文件的复制
-    public void copyFileWithBufferedStream(String srcPath,String destPath){
+    public void copyFileWithBufferedStream(String srcPath, String destPath) {
         FileInputStream fis = null;
         FileOutputStream fos = null;
         BufferedInputStream bis = null;
@@ -311,14 +286,15 @@ public class IOTest {
 
         }
     }
+
     @Test
-    public void test2(){
+    public void test2() {
         String srcPath = "C:\\Users\\Administrator\\Videos\\2023-05-09 09-59-45.mkv";
         String destPath = "C:\\Users\\Administrator\\Videos\\2023-05-012 09-59-45.mkv";
 
         long start = System.currentTimeMillis();
 
-        copyFileWithBufferedStream(srcPath,destPath);
+        copyFileWithBufferedStream(srcPath, destPath);
 
         long end = System.currentTimeMillis();
 
@@ -328,68 +304,54 @@ public class IOTest {
 
 
     public static void main(String[] args) {
-        reverseStr("abcdefg",2);
+        reverseStr("abcdefg", 2);
     }
 
     public static String reverseStr(String s, int k) {
         String result = new String();
-        for (int i = 0; i < s.length(); i+=2*k) {
+        for (int i = 0; i < s.length(); i += 2 * k) {
             //够前k个处理办法
-            if (i+k <= s.length()){
-                String reverse = reverse(s.substring(i,i+k).toCharArray());
-                result+=reverse;
-                result+=s.substring(i+k,Math.min(i+2*k,s.length()));
+            if (i + k <= s.length()) {
+                String reverse = reverse(s.substring(i, i + k).toCharArray());
+                result += reverse;
+                result += s.substring(i + k, Math.min(i + 2 * k, s.length()));
                 continue;
             }
             //不够2k个的处理办法
-            result+=reverse(s.substring(i,s.length()).toCharArray());
+            result += reverse(s.substring(i, s.length()).toCharArray());
         }
         return result;
     }
 
     /**
      * 将字符数组翻转，以字符串返回
+     *
      * @param s
      * @return
      */
-    public static String reverse (char[] s){
-        for (int i = 0; i < s.length/2; i++) {
+    public static String reverse(char[] s) {
+        for (int i = 0; i < s.length / 2; i++) {
             char temp = s[i];
-            s[i] = s[s.length-1-i];
-            s[s.length-1-i] = temp;
+            s[i] = s[s.length - 1 - i];
+            s[s.length - 1 - i] = temp;
         }
         return String.valueOf(s);
     }
 
 
-
-
-
-
-
-
-
-
     public String replaceSpace(String s) {
-        return s.replace(" ","%20");
+        return s.replace(" ", "%20");
     }
 
 
-
-
-
-
-
-
-
     @Test
-    public void testReadLine()throws IOException {
+    public void testReadLine() throws IOException {
         // 创建流对象
         BufferedReader br = new BufferedReader(new FileReader("in.txt"));
         // 定义字符串,保存读取的一行文字
         String line;
         // 循环读取,读取到最后返回null
-        while ((line = br.readLine())!=null) {
+        while ((line = br.readLine()) != null) {
             System.out.println(line);
         }
         // 释放资源
@@ -397,7 +359,7 @@ public class IOTest {
     }
 
     @Test
-    public void testNewLine()throws IOException{
+    public void testNewLine() throws IOException {
         // 创建流对象
         BufferedWriter bw = new BufferedWriter(new FileWriter("out.txt"));
         // 写出数据
@@ -411,28 +373,6 @@ public class IOTest {
         // 释放资源
         bw.close();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Test
@@ -453,8 +393,9 @@ public class IOTest {
         oos.writeBoolean(relive);
         oos.close();
     }
+
     @Test
-    public void reload()throws IOException{
+    public void reload() throws IOException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("game.dat"));
         String name = ois.readUTF();
         int age = ois.readInt();
@@ -463,19 +404,10 @@ public class IOTest {
         double price = ois.readDouble();
         boolean relive = ois.readBoolean();
 
-        System.out.println(name+"," + age + "," + gender + "," + energy + "," + price + "," + relive);
+        System.out.println(name + "," + age + "," + gender + "," + energy + "," + price + "," + relive);
 
         ois.close();
     }
-
-
-
-
-
-
-
-
-
 
 
     @Test
@@ -506,17 +438,6 @@ public class IOTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     @Test
     public void test0134() throws UnknownHostException {
         InetAddress localHost = InetAddress.getLocalHost();
@@ -524,58 +445,24 @@ public class IOTest {
     }
 
     @Test
-    public void test025()throws UnknownHostException{
+    public void test025() throws UnknownHostException {
         InetAddress atguigu = InetAddress.getByName("www.baidu.com");
         System.out.println(atguigu);
     }
 
     @Test
-    public void test036()throws UnknownHostException{
+    public void test036() throws UnknownHostException {
 //		byte[] addr = {112,54,108,98};
-        byte[] addr = {(byte)192,(byte)168,24,56};
+        byte[] addr = {(byte) 192, (byte) 168, 24, 56};
         InetAddress atguigu = InetAddress.getByAddress(addr);
         System.out.println(atguigu);
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Test
-    public void test88() throws Exception{
+    public void test88() throws Exception {
         //1、准备一个ServerSocket对象，并绑定8888端口
-        ServerSocket server =  new ServerSocket(8888);
+        ServerSocket server = new ServerSocket(8888);
         System.out.println("等待连接....");
 
         //2、在8888端口监听客户端的连接，该方法是个阻塞的方法，如果没有客户端连接，将一直等待
@@ -609,7 +496,7 @@ public class IOTest {
     }
 
     @Test
-    public void test111() throws Exception{
+    public void test111() throws Exception {
         // 1、准备Socket，连接服务器，需要指定服务器的IP地址和端口号
         Socket socket = new Socket("127.0.0.1", 8888);
 
@@ -637,16 +524,6 @@ public class IOTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     @Test
     public void test000() throws Exception {
         // 1、准备一个ServerSocket
@@ -654,10 +531,10 @@ public class IOTest {
         System.out.println("等待连接...");
 
         int count = 0;
-        while(true){
+        while (true) {
             // 2、监听一个客户端的连接
             Socket socket = server.accept();
-            System.out.println("第" + ++count + "个客户端"+socket.getInetAddress().getHostAddress()+"连接成功！！");
+            System.out.println("第" + ++count + "个客户端" + socket.getInetAddress().getHostAddress() + "连接成功！！");
 
             ClientHandlerThread ct = new ClientHandlerThread(socket);
             ct.start();
@@ -667,7 +544,7 @@ public class IOTest {
     }
 
 
-    static class ClientHandlerThread extends Thread{
+    static class ClientHandlerThread extends Thread {
         private Socket socket;
         private String ip;
 
@@ -677,8 +554,8 @@ public class IOTest {
             ip = socket.getInetAddress().getHostAddress();
         }
 
-        public void run(){
-            try{
+        public void run() {
+            try {
                 //（1）获取输入流，用来接收该客户端发送给服务器的数据
                 BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 //（2）获取输出流，用来发送数据给该客户端
@@ -693,10 +570,10 @@ public class IOTest {
                     //（5）返回给客户端
                     ps.println(word);
                 }
-                System.out.println("客户端" + ip+"正常退出");
-            }catch(Exception  e){
-                System.out.println("客户端" + ip+"意外退出");
-            }finally{
+                System.out.println("客户端" + ip + "正常退出");
+            } catch (Exception e) {
+                System.out.println("客户端" + ip + "意外退出");
+            } finally {
                 try {
                     //（6）断开连接
                     socket.close();
@@ -708,9 +585,8 @@ public class IOTest {
     }
 
 
-
     @Test
-    public void test90() throws Exception{
+    public void test90() throws Exception {
         // 1、准备Socket，连接服务器，需要指定服务器的IP地址和端口号
         Socket socket = new Socket("127.0.0.1", 8888);
 
@@ -720,12 +596,13 @@ public class IOTest {
 
         // 3、获取输入流，用来接收服务器发送给该客户端的数据
         InputStream input = socket.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(input));;
+        BufferedReader br = new BufferedReader(new InputStreamReader(input));
+        ;
         Scanner scanner = new Scanner(System.in);
-        while(true){
+        while (true) {
             System.out.println("输入发送给服务器的单词或成语：");
             String message = scanner.nextLine();
-            if(message.equals("stop")){
+            if (message.equals("stop")) {
                 socket.shutdownOutput();
                 break;
             }
@@ -733,7 +610,7 @@ public class IOTest {
             // 4、 发送数据
             ps.println(message);
             // 接收数据
-            String feedback  = br.readLine();
+            String feedback = br.readLine();
             System.out.println("从服务器收到的反馈是：" + feedback);
         }
 
@@ -744,7 +621,7 @@ public class IOTest {
 
 
     @Test
-    public void test912() throws Exception{
+    public void test912() throws Exception {
         // 1、准备Socket，连接服务器，需要指定服务器的IP地址和端口号
         Socket socket = new Socket("127.0.0.1", 8888);
 
@@ -754,12 +631,13 @@ public class IOTest {
 
         // 3、获取输入流，用来接收服务器发送给该客户端的数据
         InputStream input = socket.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(input));;
+        BufferedReader br = new BufferedReader(new InputStreamReader(input));
+        ;
         Scanner scanner = new Scanner(System.in);
-        while(true){
+        while (true) {
             System.out.println("输入发送给服务器的单词或成语：");
             String message = scanner.nextLine();
-            if(message.equals("stop")){
+            if (message.equals("stop")) {
                 socket.shutdownOutput();
                 break;
             }
@@ -767,7 +645,7 @@ public class IOTest {
             // 4、 发送数据
             ps.println(message);
             // 接收数据
-            String feedback  = br.readLine();
+            String feedback = br.readLine();
             System.out.println("从服务器收到的反馈是：" + feedback);
         }
 
@@ -777,37 +655,17 @@ public class IOTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@Test
-public void test222(){
-    String the_sky_is_blue = reverseWords("the sky is blue");
-}
-
+    @Test
+    public void test222() {
+        String the_sky_is_blue = reverseWords("the sky is blue");
+    }
 
 
     public String reverseWords(String s) {
         //1.先去除多于空格
         StringBuilder sb = removeSpace(s);
         //2.翻转整个字符串
-        reverseStr(sb,0,sb.length()-1);
+        reverseStr(sb, 0, sb.length() - 1);
         //3.翻转每个单词
         reverseWord(sb);
         return sb.toString();
@@ -815,24 +673,25 @@ public void test222(){
 
     /**
      * 去除多于空格
+     *
      * @param s
      * @return
      */
-    public StringBuilder removeSpace(String s){
+    public StringBuilder removeSpace(String s) {
         StringBuilder sb = new StringBuilder();
         int start = 0;
-        int end = s.length()-1;
+        int end = s.length() - 1;
         //去除前导空格
-        while (s.charAt(start) == ' '){
+        while (s.charAt(start) == ' ') {
             start++;
         }
         //去除后导空格
-        while (s.charAt(end) == ' '){
+        while (s.charAt(end) == ' ') {
             end--;
         }
         //去除中间多于空格
-        while (start <= end){
-            if (s.charAt(start) != ' ' || sb.charAt(sb.length()-1) != ' '){
+        while (start <= end) {
+            if (s.charAt(start) != ' ' || sb.charAt(sb.length() - 1) != ' ') {
                 sb.append(s.charAt(start));
             }
             start++;
@@ -842,15 +701,16 @@ public void test222(){
 
     /**
      * 翻转sb的指定区间的字符
+     *
      * @param sb
      * @param start
      * @param end
      */
-    public void reverseStr(StringBuilder sb,int start,int end){
-        while (start < end){
+    public void reverseStr(StringBuilder sb, int start, int end) {
+        while (start < end) {
             char temp = sb.charAt(start);
-            sb.setCharAt(start,sb.charAt(end));
-            sb.setCharAt(end,temp);
+            sb.setCharAt(start, sb.charAt(end));
+            sb.setCharAt(end, temp);
             start++;
             end--;
         }
@@ -858,13 +718,14 @@ public void test222(){
 
     /**
      * 翻转每个单词
+     *
      * @param sb
      */
-    public void reverseWord(StringBuilder sb){
+    public void reverseWord(StringBuilder sb) {
         int start = 0;
         int end = 1;
-        while (start<sb.length()) {
-            if (end<sb.length() && sb.charAt(end) != ' ') {
+        while (start < sb.length()) {
+            if (end < sb.length() && sb.charAt(end) != ' ') {
                 end++;
             }
             //区间定义为左闭右闭
@@ -875,13 +736,8 @@ public void test222(){
     }
 
 
-
-
-
-
-
     @Test
-    public void test0153() throws ClassNotFoundException{
+    public void test0153() throws ClassNotFoundException {
         Class c1 = IOTest.class;
         IOTest obj = new IOTest();
         Class c2 = obj.getClass();
@@ -897,8 +753,8 @@ public void test222(){
         System.out.println(c1 == c3);
         System.out.println(c1 == c4);
         System.out.println("master修改了");
-    }
-
+        System.out.println("fix第二次修改了");
+}
 
 
 
