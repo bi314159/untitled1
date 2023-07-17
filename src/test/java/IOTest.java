@@ -754,6 +754,7 @@ public class IOTest {
         System.out.println(c1 == c4);
         System.out.println("master修改了");
         System.out.println("fix第二次修改了");
+        System.out.println("测试啦");
 }
 
 
